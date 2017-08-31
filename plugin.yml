@@ -1,0 +1,10 @@
+main: me.untilt.Main
+name: TeamDeathMatch
+version: 1.0
+author: Hank
+description: Random TDM made by Hank http://ctf.delphinadrealms.com
+commands:
+    ctf:
+      description: Testing command
+      usage: /tdm <args>
+      permission: tdm.mini
