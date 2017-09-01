@@ -23,12 +23,14 @@ public class CommandHandler implements CommandExecutor {
                     case "blue":
                         player.setDisplayName(ChatColor.BLUE + player.getName());
                         Match.blue.addPlayer(player);
+                        Match.red.removePlayer(player);
                         player.sendMessage(ChatColor.GOLD + "You have joined team: " + ChatColor.BLUE + "blue");
                         Main.match.updateTeams();
                         break;
                     case "red":
                         player.setDisplayName(ChatColor.RED + player.getName());
                         Match.red.addPlayer(player);
+                        Match.blue.removePlayer(player);
                         player.sendMessage(ChatColor.GOLD + "You have joined team: " + ChatColor.RED + "red");
                         Main.match.updateTeams();
                         break;
@@ -79,7 +81,7 @@ public class CommandHandler implements CommandExecutor {
                         if (sender.hasPermission("tdm.setspawn")) {
                             switch (args[1].toLowerCase()) {
                                 case "red":
-                                    sender.sendMessage(((Player) sender).getLocation().toString());
+                                    ;
                                     break;
                                 case "blue":
                                     break;

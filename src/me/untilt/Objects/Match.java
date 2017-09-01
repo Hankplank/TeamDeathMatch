@@ -1,5 +1,6 @@
 package me.untilt.Objects;
 
+import me.untilt.Handlers.SQLManager;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.Main;
 import org.bukkit.craftbukkit.libs.it.unimi.dsi.fastutil.objects.ObjectCollections;
@@ -19,6 +20,7 @@ public class Match {
     public HashMap<Integer,Integer> score;
     public static Team red;
     public static Team blue;
+    public Map map;
 
     public boolean isMatchPlaying;
 
@@ -29,6 +31,8 @@ public class Match {
         this.red = new Team(Team.TEAM.RED);
         this.blue = new Team(Team.TEAM.BLUE);
         this.score = new HashMap<>();
+        SQLManager sql = new SQLManager();
+        this.map =  sql.getMap("default",this.red,this.blue);
     }
 
     public void reset() {

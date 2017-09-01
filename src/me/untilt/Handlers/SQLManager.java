@@ -2,6 +2,8 @@ package me.untilt.Handlers;
 
 import me.untilt.Objects.Classes;
 import me.untilt.Objects.Map;
+import me.untilt.Objects.Team;
+import org.bukkit.Location;
 
 import java.sql.*;
 import java.util.UUID;
@@ -45,7 +47,42 @@ public class SQLManager {
         }
     }
 
-    //public Map
+    public Map getMap(String mapname, Team team1, Team team2) {
+        try {
+            String getKills = "SELECT * FROM MAPS WHERE mapname=\"" + mapname + "\";";
+            System.out.println(getKills);
+            Statement getKillsStatement = connect.createStatement();
+            ResultSet rs  = getKillsStatement.executeQuery(getKills);
+            double redspawnx = rs.getDouble("redspawnx");
+            double redspawny = rs.getDouble("redspawny");
+            double redspawnz = rs.getDouble("redspawnz");
+            double bluespawnx = rs.getDouble("bluespawnx");
+            double bluespawny = rs.getDouble("bluespawny");
+            double bluespawnz = rs.getDouble("bluespawnz");
+            Map map = new Map(team1,team2,mapname,redspawnx,redspawny,redspawnz,bluespawnx,bluespawny,bluespawnz);
+            return map;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void setRedSpawn(Location location) {
+        double redSpawnX = location.getX();
+        double redSpawnY = location.getY();
+        double redSpawnZ = location.getZ();
+        try {
+            String setSpawnX = "UPDATE MAPS SET redspawnx=" + redSpawnX + " WHERE mapname=\"default\";";
+            String setSpawnY = "UPDATE MAPS SET redspawny=" + redSpawnY + " WHERE mapname=\"default\";";
+            String setSpawnZ = "UPDATE MAPS SET redspawnz=" + redSpawnZ + " WHERE mapname=\"default\";";
+            Statement setSpawnXStatement = connect.createStatement();
+            Statement setSpawnYStatement = connect.createStatement();
+        } catch (SQLException e) {
+
+        }
+
+    }
 
     public void addUser(UUID user, String playername) {
         try {

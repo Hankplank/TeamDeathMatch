@@ -1,14 +1,10 @@
 package me.untilt.Objects;
 
-import me.untilt.Main;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.World;
-import org.bukkit.craftbukkit.v1_12_R1.CraftWorld;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * Created by henry27 on 8/31/2017.
@@ -45,13 +41,15 @@ public class Team {
         this.team = teamToSet;
         this.score = 0;
         this.playerList = new ArrayList<>();
-        if (teamToSet == TEAM.RED) {
-
-        }
+        this.getSpawn()
     }
 
     public void addPlayer(Player player) {
         playerList.add(player);
+        for (Player x : playerList) {
+            x.sendMessage(ChatColor.GOLD + "Player: " + player.getDisplayName() + ChatColor.GOLD + " has joined the game on your team!");
+        }
+        player.teleport(getSpawn());
     }
 
     public void removePlayer(Player player) {

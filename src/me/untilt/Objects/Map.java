@@ -5,6 +5,8 @@ package me.untilt.Objects;
  */
 public class Map {
 
+    private String mapName;
+
     private double spawnRedX;
     private double spawnRedY;
     private double spawnRedZ;
@@ -13,7 +15,7 @@ public class Map {
     private double spawnBlueZ;
 
 
-    public Map(Team.TEAM team1,Team.TEAM team2) {
+    public Map(Team team1,Team team2, String mapName, double spawnredX, double spawnRedY, double spawnRedZ, double spawnBlueX, double spawnBlueY,double spawnBlueZ) {
 
     }
 }
