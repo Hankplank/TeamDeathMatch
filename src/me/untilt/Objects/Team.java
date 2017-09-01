@@ -41,7 +41,7 @@ public class Team {
         this.team = teamToSet;
         this.score = 0;
         this.playerList = new ArrayList<>();
-        this.getSpawn()
+
     }
 
     public void addPlayer(Player player) {

@@ -78,11 +78,35 @@ public class SQLManager {
             String setSpawnZ = "UPDATE MAPS SET redspawnz=" + redSpawnZ + " WHERE mapname=\"default\";";
             Statement setSpawnXStatement = connect.createStatement();
             Statement setSpawnYStatement = connect.createStatement();
+            Statement setSpawnZStatement = connect.createStatement();
+            setSpawnXStatement.executeUpdate(setSpawnX);
+            setSpawnYStatement.executeUpdate(setSpawnY);
+            setSpawnZStatement.executeUpdate(setSpawnZ);
         } catch (SQLException e) {
-
+            e.printStackTrace();
         }
 
     }
+
+    public void setBlueSpawn(Location location) {
+        double blueSpawnX = location.getX();
+        double blueSpawnY = location.getY();
+        double blueSpawnZ = location.getZ();
+        try {
+            String setSpawnX = "UPDATE MAPS SET bluespawnx=" + blueSpawnX + " WHERE mapname=\"default\";";
+            String setSpawnY = "UPDATE MAPS SET bluespawny=" + blueSpawnY + " WHERE mapname=\"default\";";
+            String setSpawnZ = "UPDATE MAPS SET bluespawnz=" + blueSpawnZ + " WHERE mapname=\"default\";";
+            Statement setSpawnXStatement = connect.createStatement();
+            Statement setSpawnYStatement = connect.createStatement();
+            Statement setSpawnZStatement = connect.createStatement();
+            setSpawnXStatement.executeUpdate(setSpawnX);
+            setSpawnYStatement.executeUpdate(setSpawnY);
+            setSpawnZStatement.executeUpdate(setSpawnZ);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public void addUser(UUID user, String playername) {
         try {
