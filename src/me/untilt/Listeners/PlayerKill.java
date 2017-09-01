@@ -1,5 +1,6 @@
 package me.untilt.Listeners;
 
+import me.untilt.Handlers.SQLManager;
 import me.untilt.Main;
 import me.untilt.Objects.Match;
 import me.untilt.Objects.Team;
@@ -20,6 +21,7 @@ public class PlayerKill implements Listener {
     private void checkPlayersOnDifferentTeams(Player killed, Player killer) {
         Team.TEAM killedTeam;
         Team.TEAM killerTeam;
+
         if (Match.red.isPlayerOnTeam(killed)) {
             killedTeam = Team.TEAM.RED;
         } else if (Match.blue.isPlayerOnTeam(killed)) {
@@ -36,12 +38,17 @@ public class PlayerKill implements Listener {
             killerTeam = Team.TEAM.NO_TEAM;
             return;
         }
+        SQLManager sql = new SQLManager();
         if (killedTeam.equals(Team.TEAM.BLUE) && killerTeam.equals(Team.TEAM.RED)) {
             Match.red.addKills(1);
             Main.match.updateScore();
+            sql.addKills(killer.getUniqueId(),1);
+            sql.addDeaths(killed.getUniqueId(),1);
         } else if (killedTeam.equals(Team.TEAM.RED) && killerTeam.equals(Team.TEAM.BLUE)) {
             Match.blue.addKills(1);
             Main.match.updateScore();
+            sql.addKills(killer.getUniqueId(),1);
+            sql.addDeaths(killed.getUniqueId(),1);
         } else {
             return;
         }

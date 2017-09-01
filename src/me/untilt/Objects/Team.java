@@ -1,6 +1,9 @@
 package me.untilt.Objects;
 
 import me.untilt.Main;
+import org.bukkit.Location;
+import org.bukkit.World;
+import org.bukkit.craftbukkit.v1_12_R1.CraftWorld;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -36,10 +39,15 @@ public class Team {
     public int score;
     public TEAM team;
 
+    private Location spawn;
+
     public Team(TEAM teamToSet) {
         this.team = teamToSet;
         this.score = 0;
         this.playerList = new ArrayList<>();
+        if (teamToSet == TEAM.RED) {
+
+        }
     }
 
     public void addPlayer(Player player) {
@@ -81,5 +89,13 @@ public class Team {
         } else {
             return false;
         }
+    }
+
+    public void setSpawn(Location loc) {
+        this.spawn = loc;
+    }
+
+    public Location getSpawn() {
+        return this.spawn;
     }
 }

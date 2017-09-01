@@ -50,7 +50,14 @@ public class CommandHandler implements CommandExecutor {
                 switch (args[0]) {
                     case "join":
                         handleJoinTeam(((Player) sender).getPlayer(),args);
-                        sender.getServer().broadcastMessage(ChatColor.AQUA + sender.getName() + " has joined the " + ChatColor.RED + "red " + ChatColor.AQUA + "team.");
+                       switch (args[1].toLowerCase()) {
+                           case "blue":
+                               sender.getServer().broadcastMessage(ChatColor.AQUA + sender.getName() + " has joined the " + ChatColor.BLUE + "blue " + ChatColor.AQUA + "team.");
+                               break;
+                           case "red":
+                               sender.getServer().broadcastMessage(ChatColor.AQUA + sender.getName() + " has joined the " + ChatColor.RED + "red " + ChatColor.AQUA + "team.");
+                               break;
+                       }
                         break;
                     case "printteams":
                         sender.sendMessage(Match.red.showTeam());
@@ -68,6 +75,19 @@ public class CommandHandler implements CommandExecutor {
                         int kills = sql.getKills(((Player) sender).getUniqueId());
                         System.out.println(kills);
                         break;
+                    case "setspawn":
+                        if (sender.hasPermission("tdm.setspawn")) {
+                            switch (args[1].toLowerCase()) {
+                                case "red":
+                                    sender.sendMessage(((Player) sender).getLocation().toString());
+                                    break;
+                                case "blue":
+                                    break;
+                            }
+                            break;
+                        } else {
+                            sender.sendMessage(ChatColor.RED + "You do not have permission!");
+                        }
                     default:
                         sender.sendMessage(ChatColor.GOLD + "Command not recognized. Do /help TeamDeathMatch for command help.");
                         break;
