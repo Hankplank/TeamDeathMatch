@@ -18,4 +18,7 @@ public class User  {
     public User(Player player) {
         this.team = null;
     }
+
+    public void setTeam(String team) {
+    }
 }

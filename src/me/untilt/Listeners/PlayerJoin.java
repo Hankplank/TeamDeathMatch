@@ -1,5 +1,6 @@
-package me.untilt.Handlers;
+package me.untilt.Listeners;
 
+import me.untilt.Handlers.SQLManager;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
