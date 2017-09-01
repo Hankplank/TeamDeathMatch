@@ -3,6 +3,8 @@ package me.untilt.Objects;
 import me.untilt.Main;
 import org.bukkit.entity.Player;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -28,28 +30,49 @@ public class Team {
         }
     }
 
-    public List<Player> playerList;
+
+
+    public ArrayList<Player> playerList;
     public int score;
+    public TEAM team;
 
-
-    public Team() {
+    public Team(TEAM teamToSet) {
+        this.team = teamToSet;
         this.score = 0;
-        this.playerList = null;
+        this.playerList = new ArrayList<>();
     }
 
-    public void addPlayer(Player player, TEAM team) {
+    public void addPlayer(Player player) {
         playerList.add(player);
     }
 
+    public void removePlayer(Player player) {
+        playerList.remove(player);
+    }
 
-    public List<Player> getPlayerList() {
+
+    public ArrayList<Player> getPlayersOnTeam() {
         return this.playerList;
     }
 
     public Team.TEAM getPlayerTeam(Player player) {
         if (isPlayerOnTeam(player)) {
-
+            return this.team;
+        } else {
+            return TEAM.NO_TEAM;
         }
+    }
+
+    public void addKills(int killsToAdd) {
+        this.score += killsToAdd;
+    }
+
+    public String showTeam() {
+        ArrayList<String> teamPlayers = new ArrayList<>();
+        for (Player x : playerList) {
+            teamPlayers.add(x.getDisplayName());
+        }
+        return teamPlayers.toString();
     }
 
     public boolean isPlayerOnTeam(Player player) {

@@ -2,10 +2,7 @@ package me.untilt.Handlers;
 
 import me.untilt.Objects.Classes;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.UUID;
 
 /**
@@ -35,7 +32,7 @@ public class SQLManager {
 
     public void addUser(UUID user, String playername) {
         try {
-            String addUser = "INSERT INTO USERS VALUES (\" " + user + "\" , \"" + playername + "\" , 1 , 0 , 0);";
+            String addUser = "INSERT INTO USERS VALUES ( \"" + user + "\" , \"" + playername + "\" , 1 , 0 , 0);";
             System.out.println(addUser);
             Statement add = connect.createStatement();
             add.executeUpdate(addUser);
@@ -47,12 +44,44 @@ public class SQLManager {
     public void changeClass(UUID user, String classToChangeTo) {
         try {
             String changeClass = "UPDATE USERS SET chosenClass=\"" + classToChangeTo +"\" WHERE userUUID=\"" + user + "\";";
-            System.out.println("UPDATE USERS SET chosenClass=\"" + classToChangeTo +"\" WHERE userUUID=\"" + user + "\";");
+            System.out.println(changeClass);
             Statement changeClassStatement = connect.createStatement();
             changeClassStatement.executeUpdate(changeClass);
         } catch (SQLException e) {
 
         }
 
+    }
+
+
+    public int getKills(UUID user) {
+        try {
+            String getKills = "SELECT * FROM USERS WHERE userUUID=\"" + user + "\";";
+            System.out.println(getKills);
+            Statement getKillsStatement = connect.createStatement();
+            ResultSet rs  = getKillsStatement.executeQuery(getKills);
+            return rs.getInt("kills");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public void addKills(UUID user, int killsToAdd) {
+        try {
+            int getKills;
+            if (getKills(user) == -1) {
+                System.out.println("COULDN'T ADD KILLS");
+                return;
+            } else {
+                getKills = getKills(user);
+            }
+            int newKills = getKills + killsToAdd;
+            String addKills = "UPDATE USERS SET kills=" + newKills + ";";
+            Statement addKillsStatement = connect.createStatement();
+            addKillsStatement.executeUpdate(addKills);
+        } catch (SQLException e) {
+
+        }
     }
 }

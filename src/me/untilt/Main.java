@@ -4,6 +4,7 @@ import me.untilt.Handlers.CommandHandler;
 import me.untilt.Handlers.SQLManager;
 import me.untilt.Listeners.PlayerJoin;
 import me.untilt.Listeners.PlayerKill;
+import me.untilt.Listeners.PlayerLeave;
 import me.untilt.Objects.Match;
 
 import org.bukkit.event.Listener;
@@ -24,10 +25,12 @@ public class Main extends JavaPlugin {
         this.getCommand("tdm").setExecutor(new CommandHandler());
         getServer().getPluginManager().registerEvents(new PlayerJoin(),this);
         getServer().getPluginManager().registerEvents(new PlayerKill(),this);
+        getServer().getPluginManager().registerEvents(new PlayerLeave(),this);
     }
 
     @Override
     public void onDisable() {
 
     }
+
 }

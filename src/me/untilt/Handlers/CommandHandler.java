@@ -21,13 +21,15 @@ public class CommandHandler implements CommandExecutor {
             if (!Main.match.equals(null)) {
                 switch (args[1]) {
                     case "blue":
-                        Match.blue.addPlayer(player, Team.TEAM.BLUE);
-                        player.sendMessage(ChatColor.GOLD + "You have joined team: " + ChatColor.RED + "red");
+                        player.setDisplayName(ChatColor.BLUE + player.getName());
+                        Match.blue.addPlayer(player);
+                        player.sendMessage(ChatColor.GOLD + "You have joined team: " + ChatColor.BLUE + "blue");
                         Main.match.updateTeams();
                         break;
                     case "red":
-                        Match.red.addPlayer(player,Team.TEAM.RED);
-                        player.sendMessage(ChatColor.GOLD + "You have joined team: " + ChatColor.BLUE + "blue");
+                        player.setDisplayName(ChatColor.RED + player.getName());
+                        Match.red.addPlayer(player);
+                        player.sendMessage(ChatColor.GOLD + "You have joined team: " + ChatColor.RED + "red");
                         Main.match.updateTeams();
                         break;
                     default:
@@ -48,9 +50,26 @@ public class CommandHandler implements CommandExecutor {
                 switch (args[0]) {
                     case "join":
                         handleJoinTeam(((Player) sender).getPlayer(),args);
+                        sender.getServer().broadcastMessage(ChatColor.AQUA + sender.getName() + " has joined the " + ChatColor.RED + "red " + ChatColor.AQUA + "team.");
+                        break;
+                    case "printteams":
+                        sender.sendMessage(Match.red.showTeam());
+                        sender.sendMessage(Match.blue.showTeam());
+                        break;
+                    case "score":
+                        if (Main.match.isMatchPlaying && !(Main.match.score.equals(null))) {
+                            sender.sendMessage("The score of the game is: " + ChatColor.RED + Main.match.score.get(0) + ChatColor.WHITE + ":" +ChatColor.BLUE + Main.match.score.get(1));
+                        } else {
+                            sender.sendMessage("Game is not in progress!");
+                        }
+                        break;
+                    case "stats":
+                        SQLManager sql = new SQLManager();
+                        int kills = sql.getKills(((Player) sender).getUniqueId());
+                        System.out.println(kills);
                         break;
                     default:
-                        sender.sendMessage(ChatColor.GOLD + "Command not recognized. Do /help minigame for command help.");
+                        sender.sendMessage(ChatColor.GOLD + "Command not recognized. Do /help TeamDeathMatch for command help.");
                         break;
                 }
                 return true;
