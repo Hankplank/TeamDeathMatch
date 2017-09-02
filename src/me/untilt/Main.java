@@ -19,6 +19,8 @@ public class Main extends JavaPlugin {
     SQLManager sql;
     public static Match match = null;
 
+    public static World world;
+
     @Override
     public void onEnable() {
         sql = new SQLManager();
@@ -29,7 +31,7 @@ public class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerJoin(),this);
         getServer().getPluginManager().registerEvents(new PlayerKill(),this);
         getServer().getPluginManager().registerEvents(new PlayerLeave(),this);
-
+        world = getServer().getWorlds().get(0);
     }
 
     @Override

@@ -29,8 +29,6 @@ public class Team {
         }
     }
 
-
-
     public ArrayList<Player> playerList;
     public int score;
     public TEAM team;

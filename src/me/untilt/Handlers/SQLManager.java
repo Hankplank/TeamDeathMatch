@@ -107,6 +107,37 @@ public class SQLManager {
         }
     }
 
+    public double[] getRedSpawn(String mapName) {
+        try {
+            String getSpawnX = "SELECT * FROM MAPS WHERE mapname=\""+ mapName + "\";";
+            Statement statement = connect.createStatement();
+            ResultSet rs = statement.executeQuery(getSpawnX);
+            double[] spawn = {};
+            spawn[0] = rs.getDouble("redspawnx");
+            spawn[1] = rs.getDouble("redspawny");
+            spawn[2] = rs.getDouble("redspawnz");
+            return spawn;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public double[] getBlueSpawn(String mapName) {
+        try {
+            String getSpawnX = "SELECT * FROM MAPS WHERE mapname=\""+ mapName + "\";";
+            Statement statement = connect.createStatement();
+            ResultSet rs = statement.executeQuery(getSpawnX);
+            double[] spawn = {};
+            spawn[0] = rs.getDouble("bluespawnx");
+            spawn[1] = rs.getDouble("bluespawny");
+            spawn[2] = rs.getDouble("bluespawnz");
+            return spawn;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
     public void addUser(UUID user, String playername) {
         try {

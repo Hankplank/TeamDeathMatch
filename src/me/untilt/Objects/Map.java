@@ -16,6 +16,12 @@ public class Map {
 
 
     public Map(Team team1,Team team2, String mapName, double spawnredX, double spawnRedY, double spawnRedZ, double spawnBlueX, double spawnBlueY,double spawnBlueZ) {
-
+        this.mapName = mapName;
+        this.spawnBlueX = spawnBlueX;
+        this.spawnBlueY = spawnBlueY;
+        this.spawnBlueZ = spawnBlueZ;
+        this.spawnRedX = spawnredX;
+        this.spawnRedY = spawnRedY;
+        this.spawnRedZ = spawnRedZ;
     }
 }

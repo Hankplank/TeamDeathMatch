@@ -20,7 +20,7 @@ public class Match {
     public HashMap<Integer,Integer> score;
     public static Team red;
     public static Team blue;
-    public Map map;
+    public static Map map;
 
     public boolean isMatchPlaying;
 
@@ -32,7 +32,9 @@ public class Match {
         this.blue = new Team(Team.TEAM.BLUE);
         this.score = new HashMap<>();
         SQLManager sql = new SQLManager();
-        this.map =  sql.getMap("default",this.red,this.blue);
+        double[] redSpawn = sql.getRedSpawn("default");
+        double[] blueSpawn = sql.getBlueSpawn("default");
+        this.map =  new Map(this.red,this.blue, "default", redSpawn[0], redSpawn[1],redSpawn[2],blueSpawn[0],blueSpawn[1],blueSpawn[2]);
     }
 
     public void reset() {
