@@ -1,6 +1,7 @@
 package me.untilt.Objects;
 
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -47,7 +48,9 @@ public class Team {
         for (Player x : playerList) {
             x.sendMessage(ChatColor.GOLD + "Player: " + player.getDisplayName() + ChatColor.GOLD + " has joined the game on your team!");
         }
-        player.teleport(getSpawn());
+        player.setGameMode(GameMode.SURVIVAL);
+        Kit kit = new Kit();
+        kit.giveKit(player);
     }
 
     public void removePlayer(Player player) {
@@ -93,5 +96,11 @@ public class Team {
 
     public Location getSpawn() {
         return this.spawn;
+    }
+
+    public void teleportPlayer(Player player) {
+        double[] coords = Match.map.getSpawn(team);
+        Location spawn = new Location(player.getWorld(),coords[0],coords[1],coords[2]);
+        player.teleport(spawn);
     }
 }

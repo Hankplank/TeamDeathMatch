@@ -43,7 +43,9 @@ public class SQLManager {
             Statement add = connect.createStatement();
             add.executeUpdate(addMap);
         } catch (SQLException e) {
-            e.printStackTrace();
+            if (!(e.getMessage().contains("UNIQUE constraint"))) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -93,9 +95,9 @@ public class SQLManager {
         double blueSpawnY = location.getY();
         double blueSpawnZ = location.getZ();
         try {
-            String setSpawnX = "UPDATE MAPS SET bluespawnx=" + blueSpawnX + " WHERE mapname=\"default\";";
-            String setSpawnY = "UPDATE MAPS SET bluespawny=" + blueSpawnY + " WHERE mapname=\"default\";";
-            String setSpawnZ = "UPDATE MAPS SET bluespawnz=" + blueSpawnZ + " WHERE mapname=\"default\";";
+            String setSpawnX = "UPDATE MAPS SET spawnbluex=" + blueSpawnX + " WHERE mapname=\"default\";";
+            String setSpawnY = "UPDATE MAPS SET spawnbluey=" + blueSpawnY + " WHERE mapname=\"default\";";
+            String setSpawnZ = "UPDATE MAPS SET spawnbluez=" + blueSpawnZ + " WHERE mapname=\"default\";";
             Statement setSpawnXStatement = connect.createStatement();
             Statement setSpawnYStatement = connect.createStatement();
             Statement setSpawnZStatement = connect.createStatement();
@@ -112,10 +114,10 @@ public class SQLManager {
             String getSpawnX = "SELECT * FROM MAPS WHERE mapname=\""+ mapName + "\";";
             Statement statement = connect.createStatement();
             ResultSet rs = statement.executeQuery(getSpawnX);
-            double[] spawn = {};
-            spawn[0] = rs.getDouble("redspawnx");
-            spawn[1] = rs.getDouble("redspawny");
-            spawn[2] = rs.getDouble("redspawnz");
+            double[] spawn = {5,5,5};
+            spawn[0] = rs.getDouble("spawnredx");
+            spawn[1] = rs.getDouble("spawnredy");
+            spawn[2] = rs.getDouble("spawnredz");
             return spawn;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -127,10 +129,10 @@ public class SQLManager {
             String getSpawnX = "SELECT * FROM MAPS WHERE mapname=\""+ mapName + "\";";
             Statement statement = connect.createStatement();
             ResultSet rs = statement.executeQuery(getSpawnX);
-            double[] spawn = {};
-            spawn[0] = rs.getDouble("bluespawnx");
-            spawn[1] = rs.getDouble("bluespawny");
-            spawn[2] = rs.getDouble("bluespawnz");
+            double[] spawn = {5,5,5};
+            spawn[0] = rs.getDouble("spawnredx");
+            spawn[1] = rs.getDouble("spawnredy");
+            spawn[2] = rs.getDouble("spawnredz");
             return spawn;
         } catch (SQLException e) {
             e.printStackTrace();

@@ -25,6 +25,7 @@ public class CommandHandler implements CommandExecutor {
                         Match.blue.addPlayer(player);
                         Match.red.removePlayer(player);
                         player.sendMessage(ChatColor.GOLD + "You have joined team: " + ChatColor.BLUE + "blue");
+                        Match.blue.teleportPlayer(player);
                         Main.match.updateTeams();
                         break;
                     case "red":
@@ -32,6 +33,7 @@ public class CommandHandler implements CommandExecutor {
                         Match.red.addPlayer(player);
                         Match.blue.removePlayer(player);
                         player.sendMessage(ChatColor.GOLD + "You have joined team: " + ChatColor.RED + "red");
+                        Match.red.teleportPlayer(player);
                         Main.match.updateTeams();
                         break;
                     default:

@@ -15,6 +15,17 @@ public class Map {
     private double spawnBlueZ;
 
 
+    public double[] getSpawn(Team.TEAM team1) {
+        if (team1.toString().equals( "RED")) {
+            double[] spawn = {spawnRedX,spawnRedY,spawnRedZ};
+            return spawn;
+        } else {
+            double[] spawn = {spawnBlueX,spawnBlueY,spawnBlueZ};
+            return spawn;
+        }
+
+    }
+
     public Map(Team team1,Team team2, String mapName, double spawnredX, double spawnRedY, double spawnRedZ, double spawnBlueX, double spawnBlueY,double spawnBlueZ) {
         this.mapName = mapName;
         this.spawnBlueX = spawnBlueX;
