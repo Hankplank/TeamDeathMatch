@@ -34,6 +34,8 @@ public class Team {
     public int score;
     public TEAM team;
 
+    private Kit kit;
+
     private Location spawn;
 
     public Team(TEAM teamToSet) {
@@ -49,12 +51,17 @@ public class Team {
             x.sendMessage(ChatColor.GOLD + "Player: " + player.getDisplayName() + ChatColor.GOLD + " has joined the game on your team!");
         }
         player.setGameMode(GameMode.SURVIVAL);
-        Kit kit = new Kit();
+        this.kit = new Kit();
         kit.giveKit(player);
     }
 
     public void removePlayer(Player player) {
-        playerList.remove(player);
+        try {
+            playerList.remove(player);
+        } catch (NullPointerException e) {
+
+        }
+
     }
 
 

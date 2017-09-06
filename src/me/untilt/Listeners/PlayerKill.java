@@ -57,7 +57,7 @@ public class PlayerKill implements Listener {
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
-        if (event.getEntity() instanceof Player) {
+        if (event.getEntity() instanceof Player && !(event.getEntity().getKiller()==null)) {
             Player killed = event.getEntity().getPlayer();
             Player killer = event.getEntity().getKiller();
             if (!(killer.getPlayer().getUniqueId()==killed.getPlayer().getUniqueId()) && ( Match.blue.isPlayerOnTeam(killed) || Match.red.isPlayerOnTeam(killed))) {
@@ -69,10 +69,5 @@ public class PlayerKill implements Listener {
             }
         }
 
-
-
     }
-
-
-
 }

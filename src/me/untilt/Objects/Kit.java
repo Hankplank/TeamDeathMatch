@@ -37,12 +37,11 @@ public class Kit {
     public void giveKit(Player player) {
         player.getInventory().clear();
         Inventory inventory = player.getInventory();
-        ItemStack sword = new ItemStack(Material.STONE_SWORD,1);
-        player.getEquipment().getHelmet().setType(Material.LEATHER_HELMET);
-        player.getEquipment().getChestplate().setType(Material.LEATHER_CHESTPLATE);
-        player.getEquipment().getLeggings().setType(Material.LEATHER_LEGGINGS);
-        player.getEquipment().getBoots().setType(Material.LEATHER_BOOTS);
-        inventory.addItem(sword);
+        player.getEquipment().setHelmet(new ItemStack(Material.LEATHER_HELMET));
+        player.getEquipment().setChestplate(new ItemStack(Material.LEATHER_CHESTPLATE));
+        player.getEquipment().setLeggings(new ItemStack(Material.LEATHER_LEGGINGS));
+        player.getEquipment().setBoots(new ItemStack(Material.LEATHER_BOOTS));
+        inventory.addItem(new ItemStack(Material.STONE_SWORD,1));
 
     }
 

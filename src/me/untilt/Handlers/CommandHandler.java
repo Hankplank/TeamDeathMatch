@@ -63,6 +63,16 @@ public class CommandHandler implements CommandExecutor {
                                break;
                        }
                         break;
+                    case "leave":
+                        if (Match.red.getPlayersOnTeam().contains(sender) || Match.blue.getPlayersOnTeam().contains(sender)) {
+                            Match.red.removePlayer(((Player) sender).getPlayer());
+                            Match.blue.removePlayer(((Player) sender).getPlayer());
+                            sender.sendMessage(ChatColor.RED + "You have left your team.");
+
+                        } else {
+                            sender.sendMessage("You are not on a team!");
+                        }
+                        break;
                     case "printteams":
                         sender.sendMessage(Match.red.showTeam());
                         sender.sendMessage(Match.blue.showTeam());
