@@ -4,8 +4,12 @@ import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.PlayerInventory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created by henry27 on 8/31/2017.
@@ -34,6 +38,9 @@ public class Team {
     public int score;
     public TEAM team;
 
+    HashMap<Player, ItemStack[]> playerInventories;
+    HashMap<Player,Location> playerPreviousLocation;
+
     private Kit kit;
 
     private Location spawn;
@@ -42,11 +49,13 @@ public class Team {
         this.team = teamToSet;
         this.score = 0;
         this.playerList = new ArrayList<>();
-
+        this.playerInventories = new HashMap<>();
+        this.playerPreviousLocation = new HashMap<>();
     }
 
     public void addPlayer(Player player) {
         playerList.add(player);
+        playerInventories.put(player,player.getInventory().getContents());
         for (Player x : playerList) {
             x.sendMessage(ChatColor.GOLD + "Player: " + player.getDisplayName() + ChatColor.GOLD + " has joined the game on your team!");
         }
@@ -61,7 +70,16 @@ public class Team {
         } catch (NullPointerException e) {
 
         }
+        player.getInventory().clear();
+        try {
+            player.teleport(this.playerPreviousLocation.get(player));
+            this.playerPreviousLocation.remove(player);
+        } catch (NullPointerException e) {
 
+        }
+
+
+        //TODO give the player his inventory back after leaving a team
     }
 
 
@@ -105,8 +123,9 @@ public class Team {
         return this.spawn;
     }
 
-    public void teleportPlayer(Player player) {
+    public void teleportPlayer(Player player,Location previousLocation) {
         double[] coords = Match.map.getSpawn(team);
+        this.playerPreviousLocation.put(player,previousLocation);
         Location spawn = new Location(player.getWorld(),coords[0],coords[1],coords[2]);
         player.teleport(spawn);
     }

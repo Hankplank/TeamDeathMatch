@@ -23,17 +23,18 @@ public class CommandHandler implements CommandExecutor {
                     case "blue":
                         player.setDisplayName(ChatColor.BLUE + player.getName());
                         Match.blue.addPlayer(player);
-                        Match.red.removePlayer(player);
                         player.sendMessage(ChatColor.GOLD + "You have joined team: " + ChatColor.BLUE + "blue");
-                        Match.blue.teleportPlayer(player);
+                        Match.blue.teleportPlayer(player,player.getLocation());
                         Main.match.updateTeams();
                         break;
                     case "red":
                         player.setDisplayName(ChatColor.RED + player.getName());
                         Match.red.addPlayer(player);
-                        Match.blue.removePlayer(player);
+                        if (Match.blue.isPlayerOnTeam(player)) {
+                            Match.blue.removePlayer(player);
+                        }
                         player.sendMessage(ChatColor.GOLD + "You have joined team: " + ChatColor.RED + "red");
-                        Match.red.teleportPlayer(player);
+                        Match.red.teleportPlayer(player,player.getLocation());
                         Main.match.updateTeams();
                         break;
                     default:
